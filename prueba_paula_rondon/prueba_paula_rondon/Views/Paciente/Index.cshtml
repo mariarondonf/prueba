@@ -1,0 +1,75 @@
+﻿@model List<prueba_paula_rondon.Models.PacienteModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<PacienteModel> consulta = ViewBag.consulta;
+}
+
+<div>
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dimissible fade show" role="alert">
+            @TempData["mensaje"];
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+</div>
+
+<div class="pb-4" style="display: flex; justify-content: flex-end;">
+    <a asp-controller="Paciente" asp-action="Create" class="btn btn-primary">Agregar</a>
+</div>
+
+<div>
+    @if (consulta.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tipo documento</th>
+                    <th scope="col">Número de documento</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Correo electronico</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Estado de afiliación</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in consulta)
+                {
+                    <tr>
+                        <th>@item.idTipoDocumento</th>
+                        <th>@item.numeroDocumento</th>
+                        <th>@item.nombres</th>
+                        <th>@item.apellidos</th>
+                        <td>@item.correoElectronico</td>
+                        <td>@item.telefono</td>
+                        <td>@item.fechaNacimiento</td>
+                        @if (@item.estadoAfiliacion)
+                        {
+                            <td>Activo</td>
+                        }
+                        else
+                        {
+                            <td>Inactivo</td>
+                        }
+                        <td style="display: flex;gap: 1em;">
+                            <a asp-controller="Paciente" asp-action="Update" asp-route-idPaciente="@item.idPaciente" class="btn btn-warning">Editar</a>
+                            <a asp-controller="Paciente" asp-action="Delete" asp-route-idPaciente="@item.idPaciente" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <span>No existen registros</span>
+    }
+</div>

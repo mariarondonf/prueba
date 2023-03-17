@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Apiprueba_paula_rondon</name>
+    </assembly>
+    <members>
+        <member name="M:Apiprueba_paula_rondon.Controllers.PacienteController.consultarTipoDocumento">
+            <summary>
+            Obtener tipos de documento
+            </summary>
+            <remarks>
+            Método para obtener tipos de documento
+            </remarks>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. url no encontrada</response>
+            <response code="200">OK. arqueo retornado exitosamente</response>
+        </member>
+        <member name="M:Apiprueba_paula_rondon.Controllers.PacienteController.consultarPacientes">
+            <summary>
+            Obtener pacientes
+            </summary>
+            <remarks>
+            Método para obtener pacientes
+            </remarks>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. url no encontrada</response>
+            <response code="200">OK. arqueo retornado exitosamente</response>
+        </member>
+        <member name="M:Apiprueba_paula_rondon.Controllers.PacienteController.consultarPaciente(System.Int32)">
+            <summary>
+            Obtener paciente
+            </summary>
+            <remarks>
+            Método para obtener paciente
+            </remarks>
+            <param name="idPaciente">Identificador paciente</param>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. url no encontrada</response>
+            <response code="200">OK. arqueo retornado exitosamente</response>
+        </member>
+        <member name="M:Apiprueba_paula_rondon.Controllers.PacienteController.crearEditarPaciente(prueba_paula_rondon.Models.PacienteModel)">
+            <summary>
+            Crear o actualizar pacientes
+            </summary>
+            <remarks>
+            Método para crear o actualizar pacientes
+            </remarks>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. url no encontrada</response>
+            <response code="200">OK. arqueo retornado exitosamente</response>
+        </member>
+        <member name="M:Apiprueba_paula_rondon.Controllers.PacienteController.eliminarPaciente(System.Int32)">
+            <summary>
+            Crear o actualizar pacientes
+            </summary>
+            <remarks>
+            Método para crear o actualizar pacientes
+            </remarks>
+            <param name="idPaciente">Identificador paciente</param>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. url no encontrada</response>
+            <response code="200">OK. arqueo retornado exitosamente</response>
+        </member>
+    </members>
+</doc>

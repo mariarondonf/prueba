@@ -1,0 +1,127 @@
+USE master;  
+GO
+
+/* Creacion base de datos */
+CREATE DATABASE prueba_paula_rondon  
+
+USE prueba_paula_rondon
+
+
+/* Creacion tabla tipos de documento */
+CREATE TABLE tiposDocumento(
+	idTipoDocumento INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	nombreDocumento VARCHAR(100) NOT NULL,
+)
+
+/* Creacion tabla pacientes */
+CREATE TABLE pacientes (
+	idPaciente INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+	numeroDocumento VARCHAR(20) NOT NULL,
+	nombres VARCHAR(40) NOT NULL,
+	apellidos VARCHAR(40) NOT NULL,
+	correoElectronico VARCHAR(40) NOT NULL,
+	telefono VARCHAR(20) NOT NULL,
+	fechaNacimiento DATE NOT NULL,
+	estadoAfiliacion BIT NOT NULL,
+	idTipoDocumento	INT NOT NULL REFERENCES tiposDocumento(idTipoDocumento)
+);
+
+
+/* Creacion procedimiento almacenado para consultar pacientes */
+CREATE PROCEDURE sp_consultarPacientes
+as
+begin
+select * from pacientes
+end
+
+
+/* Creacion procedimiento almacenado para consultar paciente */
+CREATE PROCEDURE sp_consultarPaciente(
+@idPaciente INT
+)
+as
+begin
+select * from pacientes where idPaciente = @idPaciente
+end
+
+/* Creacion procedimiento almacenado para crear/editar paciente */
+CREATE PROCEDURE sp_crearEditarPaciente (
+@idPaciente INT,
+@numeroDocumento VARCHAR(20),
+@nombres VARCHAR(40),
+@apellidos VARCHAR(40),
+@correoElectronico VARCHAR(40),
+@telefono VARCHAR(20),
+@fechaNacimiento DATE,
+@estadoAfiliacion BIT,
+@idTipoDocumento INT
+) as begin
+if @idPaciente > 0 
+	begin
+	UPDATE pacientes
+		SET [numeroDocumento] = @numeroDocumento
+			,[nombres] = @nombres
+			,[apellidos] = @apellidos
+			,[correoElectronico] = @correoElectronico
+			,[telefono] = @telefono
+			,[fechaNacimiento] = @fechaNacimiento
+			,[estadoAfiliacion] = @estadoAfiliacion
+			,[idTipoDocumento] = @idTipoDocumento
+			WHERE idPaciente = @idPaciente
+	end
+else
+	begin
+		insert into pacientes(numeroDocumento, nombres, apellidos, correoElectronico, telefono, fechaNacimiento, estadoAfiliacion, idTipoDocumento)
+			values (@numeroDocumento, @nombres, @apellidos, @correoElectronico, @telefono, @fechaNacimiento, @estadoAfiliacion, @idTipoDocumento)
+	end
+end
+
+/* Creacion procedimiento almacenado para eliminar paciente */
+CREATE PROCEDURE sp_eliminarPaciente (
+@idPaciente INT
+) 
+as 
+begin
+DELETE from pacientes where idPaciente = @idPaciente 
+end
+
+
+
+
+/* Inserción tabla tipos de documento */
+USE prueba_paula_rondon
+GO
+
+/* Inserción de datos para tipos de documento */
+INSERT INTO tiposDocumento
+           ([nombreDocumento])
+     VALUES
+           ('CC Cedula de ciudadania');
+GO
+
+INSERT INTO tiposDocumento
+           ([nombreDocumento])
+     VALUES
+		   ('TI Tarjeta de identidad');
+GO
+
+INSERT INTO tiposDocumento
+           ([nombreDocumento])
+     VALUES
+		   ('PA Pasaporte');
+GO
+
+INSERT INTO tiposDocumento
+           ([nombreDocumento])
+     VALUES
+		   ('NIP Numero de identificacion personal');
+GO
+
+INSERT INTO tiposDocumento
+           ([nombreDocumento])
+     VALUES
+		   ('CE Cedula de extranjeria');
+GO
+
+
+

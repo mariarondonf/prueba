@@ -1,0 +1,82 @@
+﻿@model prueba_paula_rondon.Models.PacienteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TipoDocumentoModel> documento = ViewBag.documento;
+}
+
+<h1>Eliminar paciente</h1>
+
+<div>
+    <div class="col-sm-10">
+        <form method="post" asp-action="DeletePatient">
+
+            <input tpye="hidden" asp-for="idPaciente" style="visibility:hidden">
+
+            <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <select class="form-select" asp-for="idTipoDocumento" disabled>
+                <option selected>Tipo de documento</option>
+                @foreach (TipoDocumentoModel item in documento)
+                {
+                    <option value="@item.idTipoDocumento">@item.nombreDocumento</option>
+                }
+            </select>
+
+            <div class="form-group">
+                <label asp-for="numeroDocumento" class="control-label">Número de documento</label>
+                <input class="form-control" asp-for="numeroDocumento"disabled>
+                <span asp-validation-for="numeroDocumento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="nombres" class="control-label">nombres</label>
+                <input class="form-control" asp-for="nombres" disabled>
+                <span asp-validation-for="nombres" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="apellidos" class="control-label">Apellidos</label>
+                <input class="form-control" asp-for="apellidos" disabled>
+                <span asp-validation-for="apellidos" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="correoElectronico" class="control-label">Correo electronico</label>
+                <input class="form-control" asp-for="correoElectronico" type="email" disabled>
+                <span asp-validation-for="correoElectronico" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label">Telefono</label>
+                <input class="form-control" asp-for="telefono" disabled>
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="fechaNacimiento" class="control-label">Fecha</label>
+                <input class="form-control" asp-for="fechaNacimiento" disabled>
+                <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="false" asp-for="estadoAfiliacion" checked disabled>
+                <label class="form-check-label" asp-for="estadoAfiliacion">
+                    Estado afiliación
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Eliminar">
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
